@@ -1,0 +1,17 @@
+<div class="row col-md-6 offset-md-2">
+  <div class="col-md-3">Name</div>
+  <div class="col-md-2">Status</div>
+  <div class="col-md-3">Description</div>
+  <div class="col-md-2">Out of date</div>
+  <div class="col-md-2">Action</div>
+</div>
+<div>
+  <div *ngFor="let todo of listTodo; let i = index" class="row col-md-6 offset-md-2">
+    <div class="col-md-3">{{todo['id']}}{{todo['name']}}</div>
+    <div class="col-md-2">{{todo['status']}}</div>
+    <div class="col-md-3">{{todo['description']}}</div>
+    <div class="col-md-2">{{todo['deadline']}}</div>
+    <div class="col-md-2"><input type="button" (click)="onClickTodo(todo)" value="edit"><input type="button" (click)="deleteTodo(todo)" value="delete"></div>
+  </div>
+</div>
+

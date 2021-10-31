@@ -1,0 +1,27 @@
+<h2 class="text-center">
+  Todo App
+</h2>
+<div class="col-md-6 offset-md-2">
+<form [formGroup]="todoForm" class="form-control">
+  <input type="hidden" formControlName="id" >
+  <br>
+  Name: <input type="text" formControlName="name" class="col-md-6" [(ngModel)]="name">
+  <span *ngIf="todoForm.get('name')?.invalid && todoForm.get('name')?.touched"
+        class="text-danger err-msg">Name khong duoc lon hon 50 ky tu</span>
+  <br>
+  Status: <select formControlName="status" class="col-md-6" [(ngModel)]="status">
+    <option value="new">New</option>
+  </select>
+  <br>
+  Description: <input type="text" formControlName="description" class="col-md-6" [(ngModel)]="description">
+  <span *ngIf="todoForm.get('description')?.invalid && todoForm.get('description')?.touched"
+        class="text-danger err-msg">Description khong duoc lon hon 200 ky tu</span>
+  <br>
+  End of date: <input type="date" formControlName="deadline" class="col-md-6" [(ngModel)]="deadline">
+<!--  <span *ngIf="todoForm.get('deadline') && todoForm.get('description')?.touched"-->
+<!--        class="text-danger err-msg">Deadline khong duoc lon hon ngay hien tai</span>-->
+  <br>
+  <input type="button" (click)="createTodo(todoForm)" value="Create">
+</form>
+</div>
+<p>{{todo}}</p>
