@@ -1,18 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoServiceService {
+  private idSeq: number = 0;
+  listTodoChange = new EventEmitter<any>();
   listTodo: any[] = [];
-  todo: any;
+  todoEdit = new EventEmitter<any>();
   constructor() { }
 
-  addTodo(todo: any){
-    this.listTodo.push(todo);
-  }
-  getListTodo(){
-    return this.listTodo;
+  addTodo(todo: any) {
+    if (!todo.id) {
+      this.idSeq++;
+      todo.id = this.idSeq;
+      this.listTodo.push(todo);
+    } else {
+      for (let i=0; i<this.listTodo.length; i++) {
+        if (this.listTodo[i].id == todo.id) {
+          this.listTodo[i] = todo;
+        }
+      }
+    }
+    this.listTodoChange.emit(this.listTodo);
   }
   deleteTodo(todo: any){
     // @ts-ignore
@@ -20,10 +30,6 @@ export class TodoServiceService {
   }
 
   clickTodo(todo: any){
-    this.todo = todo;
-  }
-
-  getTodo(){
-    return this.todo;
+    this.todoEdit.emit(todo);
   }
 }

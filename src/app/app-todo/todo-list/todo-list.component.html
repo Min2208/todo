@@ -1,17 +1,23 @@
-<div class="row col-md-6 offset-md-2">
-  <div class="col-md-3">Name</div>
-  <div class="col-md-2">Status</div>
-  <div class="col-md-3">Description</div>
-  <div class="col-md-2">Out of date</div>
-  <div class="col-md-2">Action</div>
-</div>
-<div>
-  <div *ngFor="let todo of listTodo; let i = index" class="row col-md-6 offset-md-2">
-    <div class="col-md-3">{{todo['id']}}{{todo['name']}}</div>
-    <div class="col-md-2">{{todo['status']}}</div>
-    <div class="col-md-3">{{todo['description']}}</div>
-    <div class="col-md-2">{{todo['deadline']}}</div>
-    <div class="col-md-2"><input type="button" (click)="onClickTodo(todo)" value="edit"><input type="button" (click)="deleteTodo(todo)" value="delete"></div>
-  </div>
-</div>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">Name</th>
+    <th scope="col">Status</th>
+    <th scope="col">Description</th>
+    <th scope="col">Out of date</th>
+    <th scope="col">Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let todo of listTodo; let i = index">
+    <th scope="row">{{i+1}}</th>
+    <td>{{todo['name']}}</td>
+    <td>{{todo['status']}}</td>
+    <td>{{todo['description']}}</td>
+    <td>{{todo['deadline'] | date: 'dd/MM/yyyy'}}</td>
+    <td><input type="button" (click)="onClickTodo(todo)" value="edit"><input type="button" (click)="deleteTodo(todo)" value="delete"></td>
+  </tr>
+  </tbody>
+</table>
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { TodoListComponent } from './todo-list/todo-list.component';
@@ -19,6 +19,6 @@ import { TodoListComponent } from './todo-list/todo-list.component';
     CommonModule,
     ReactiveFormsModule
   ],
-  providers:[]
+  providers:[DatePipe]
 })
 export class AppTodoModule { }

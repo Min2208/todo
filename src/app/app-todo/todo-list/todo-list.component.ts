@@ -24,17 +24,19 @@ export class TodoListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.listTodo = this.service.getListTodo();
-
-  }
-
-  getName() {
-    this.listTodo = this.service.getListTodo();
+    this.service.listTodoChange.subscribe(list => {
+      let now = new Date();
+      for (let i=0; i< list.length; i++) {
+        if (list[i].deadline < now) {
+          list[i].status = "Expired";
+        }
+      }
+      this.listTodo = list;
+    })
   }
 
   onClickTodo(todo: any) {
     this.service.clickTodo(todo);
-
   }
   deleteTodo(todo: any) {
     this.service.deleteTodo(todo);
