@@ -1,0 +1,36 @@
+<div class="col-md-6 offset-md-2">
+  <table class="table table-sm">
+    <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Value</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Name</td>
+      <td>{{todo.name}}</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Status</td>
+      <td>{{todo.status}}</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Description</td>
+      <td>{{todo.description}}</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Deadline</td>
+      <td>{{todo.deadline}}</td>
+    </tr>
+    <tr>
+      <td style="text-align: center" colspan="3"><input type="button" [routerLink]="'/todos'" value="Back" ></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

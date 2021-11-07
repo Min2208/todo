@@ -3,13 +3,16 @@ import {CommonModule, DatePipe} from '@angular/common';
 import { TodoFormComponent } from './todo-form/todo-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import { TodoListComponent } from './todo-list/todo-list.component';
+import {RouterModule} from "@angular/router";
+import { DetailComponent } from './detail/detail.component';
 
 
 
 @NgModule({
     declarations: [
         TodoFormComponent,
-        TodoListComponent
+        TodoListComponent,
+        DetailComponent
     ],
   exports: [
     TodoFormComponent,
@@ -17,7 +20,8 @@ import { TodoListComponent } from './todo-list/todo-list.component';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterModule
   ],
   providers:[DatePipe]
 })

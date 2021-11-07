@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup,ValidatorFn, Validators} from "@
 import {TodoServiceService} from "../../todo-service.service";
 import {moment} from "ngx-bootstrap/chronos/testing/chain";
 import {DatePipe} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-todo-form',
@@ -11,7 +12,8 @@ import {DatePipe} from "@angular/common";
 })
 export class TodoFormComponent implements OnInit {
   todoForm: FormGroup = new FormGroup({});
-  constructor(private service: TodoServiceService, private datePipe:DatePipe) {
+  todoEdit: any;
+  constructor(private service: TodoServiceService, private datePipe:DatePipe, private router : Router) {
 
   }
   name: string = '';
@@ -26,21 +28,14 @@ export class TodoFormComponent implements OnInit {
       description: new FormControl('',Validators.maxLength(200)),
       deadline: new FormControl('')
     }, this.compareCurrentDate);
-    this.service.todoEdit.subscribe(todo => {
-      this.todoForm = new FormGroup({
-        id: new FormControl(todo.id),
-        name: new FormControl(todo.name,[Validators.required, Validators.maxLength(50)]),
-        status: new FormControl(todo.status),
-        description: new FormControl(todo.description,Validators.maxLength(200)),
-        deadline: new FormControl(this.datePipe.transform(todo.deadline, 'yyyy-MM-dd'))
-      }, this.compareCurrentDate);
-    })
-    // this.todo = this.service.getTodo();
-    // this.id = this.todo.id;
-    // this.name = this.todo.name;
-    // this.status = this.todo.status;
-    // this.description = this.todo.description;
-    // this.deadline = this.todo.deadline;
+    this.todoEdit = this.service.todoEdit;
+    this.todoForm = new FormGroup({
+      id: new FormControl(this.todoEdit.id),
+      name: new FormControl(this.todoEdit.name,[Validators.required, Validators.maxLength(50)]),
+      status: new FormControl(this.todoEdit.status),
+      description: new FormControl(this.todoEdit.description,Validators.maxLength(200)),
+      deadline: new FormControl(this.datePipe.transform(this.todoEdit.deadline, 'yyyy-MM-dd'))
+    }, this.compareCurrentDate);
   }
 
   compareCurrentDate(c: AbstractControl) {
@@ -62,5 +57,6 @@ export class TodoFormComponent implements OnInit {
     }
     this.service.addTodo(value);
     this.todoForm.reset();
+    this.router.navigate(['/todos']);
   }
 }

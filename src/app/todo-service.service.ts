@@ -7,7 +7,7 @@ export class TodoServiceService {
   private idSeq: number = 0;
   listTodoChange = new EventEmitter<any>();
   listTodo: any[] = [];
-  todoEdit = new EventEmitter<any>();
+  todoEdit: any;
   constructor() { }
 
   addTodo(todo: any) {
@@ -30,6 +30,14 @@ export class TodoServiceService {
   }
 
   clickTodo(todo: any){
-    this.todoEdit.emit(todo);
+    this.todoEdit = todo;
+  }
+
+  detail(id: any){
+    for (let i=0; i<this.listTodo.length; i++) {
+      if (this.listTodo[i].id == id) {
+        return this.listTodo[i];
+      }
+    }
   }
 }

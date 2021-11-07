@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoServiceService} from "../../todo-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-todo-list',
@@ -19,8 +20,8 @@ export class TodoListComponent implements OnInit {
   description: string;
   // @ts-ignore
   deadline: Date
-  constructor(private service: TodoServiceService) {
-
+  constructor(private service: TodoServiceService, private activateRoute: ActivatedRoute, private router : Router) {
+    this.listTodo = this.service.listTodo;
   }
 
   ngOnInit(): void {
@@ -37,9 +38,13 @@ export class TodoListComponent implements OnInit {
 
   onClickTodo(todo: any) {
     this.service.clickTodo(todo);
+    this.router.navigate(['/todos/create']);
   }
   deleteTodo(todo: any) {
     this.service.deleteTodo(todo);
-
+  }
+  detailTodo(todo: any) {
+    const queryParams = '/todos/detail/' + todo.id;
+    this.router.navigate([queryParams]);
   }
 }

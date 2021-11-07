@@ -1,31 +1,62 @@
-<h2 class="text-center">
-  Todo App
-</h2>
 <div class="col-md-6 offset-md-2">
-<form [formGroup]="todoForm" class="form-control">
-  Name: <input type="text" formControlName="name" class="col-md-6">
-  <span *ngIf="todoForm.get('name')?.invalid && todoForm.get('name')?.touched"
-        class="text-danger err-msg">Name khong duoc lon hon 50 ky tu</span>
-  <br>
-  Description: <input type="text" formControlName="description" class="col-md-6">
-  <span *ngIf="todoForm.get('description')?.invalid && todoForm.get('description')?.touched"
-        class="text-danger err-msg">Description khong duoc lon hon 200 ky tu</span>
-  <br>
-  End of date: <input type="date" formControlName="deadline" class="col-md-6">
-  <ng-container *ngIf="todoForm.get('deadline')?.touched" >
-    <span
-      *ngIf="todoForm.hasError('isValidDate')"
-      class='text-danger err-msg'
-    >Deadline phải lớn hơn ngày hiện tại</span>
-  </ng-container>
-<!--  <span *ngIf="todoForm.get('deadline') && todoForm.get('description')?.touched"-->
-<!--        class="text-danger err-msg">Deadline khong duoc lon hon ngay hien tai</span>-->
-  <br>
-  <ng-container *ngIf="todoForm.get('id')?.value; else create">
-    <input type="button" (click)="createTodo()" value="Update">
-  </ng-container>
-  <ng-template #create>
-    <input type="button" (click)="createTodo()" value="Create">
-  </ng-template>
-</form>
+  <form [formGroup]="todoForm" class="form-control">
+    <table class="table table-sm">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Value</th>
+        <th scope="col">Error</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td class="col-md-2">Name</td>
+        <td class="col-md-6"><input type="text" formControlName="name" class="col-md-6">
+        </td>
+        <td class="col-md-4">
+          <span *ngIf="todoForm.get('name')?.invalid && todoForm.get('name')?.touched"
+                class="text-danger err-msg">Name khong duoc lon hon 50 ky tu</span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Description</td>
+        <td><input type="text" formControlName="description" class="col-md-6">
+        </td>
+        <td>
+          <span *ngIf="todoForm.get('description')?.invalid && todoForm.get('description')?.touched"
+                class="text-danger err-msg">Description khong duoc lon hon 200 ky tu</span>
+        </td>
+      </tr>
+      <tr>
+        <th scope="row">4</th>
+        <td>Deadline</td>
+        <td><input type="date" formControlName="deadline" class="col-md-6">
+        </td>
+        <td>
+          <ng-container *ngIf="todoForm.get('deadline')?.touched" >
+          <span
+            *ngIf="todoForm.hasError('isValidDate')"
+            class='text-danger err-msg'
+          >Deadline phải lớn hơn ngày hiện tại</span>
+          </ng-container>
+        </td>
+      </tr>
+      <tr>
+        <td style="text-align: center" colspan="3"><ng-container *ngIf="todoForm.get('id')?.value; else create">
+          <input type="button" (click)="createTodo()" value="Update">
+          <input type="button" [routerLink]="'/todos'" value="Back">
+        </ng-container>
+          <ng-template #create>
+            <input type="button" (click)="createTodo()" value="Create">
+            <input type="button" [routerLink]="'/todos'" value="Back">
+          </ng-template>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </form>
 </div>
+
